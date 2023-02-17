@@ -19,7 +19,7 @@ sequenceDiagram
     Zapperノード->>LNURLサーバ: API response
     Note left of Zapperノード: zap invoice
     
-    LNURLサーバ->>Nostrクライアント: LUD06 JSON response (callback)
+    LNURLサーバ->>Nostrクライアント: LUD06 JSON response
     Note left of LNURLサーバ: zap invoice
 
     Nostrクライアント->>ウォレット: (コピペなど)
