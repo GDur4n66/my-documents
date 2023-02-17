@@ -11,7 +11,7 @@ sequenceDiagram
     LNURLサーバ->>Nostrクライアント: LUD06 JSON response
     Note left of LNURLサーバ: allowsNostr : true <br/>nostrPubkey : Zapper Pubkey
     
-    Nostrクライアント->>LNURLサーバ: LUD06 GET request(call back) with 
+    Nostrクライアント->>LNURLサーバ: LUD06 GET request(call back) 
     Note right of Nostrクライアント: ※callbackにzapリクエスト(kind:9734)を含む
     
     LNURLサーバ->>Zapperノード: API request invoice
