@@ -13,3 +13,6 @@ https://ドメイン名/.well-known/lnurlp/ユーザ名
 LNURLはbech32でエンコーディングされている。</br>
 lud17でエンコードなしにして、LNURLを機能別にスキームを使い分けようとしている。</br>
 LNURL-pay なら lnurlp:// として 通信するときはlnurlpをhttpsに置き換える。
+
+core-lightningのディレクトリ</br>
+Umbrel Core-Lightningでテストネット運用、TunnelSatsを使ってTorは使用しない場合のファイル一式。
