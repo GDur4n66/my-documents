@@ -1,0 +1,47 @@
+# [General options]
+
+
+# [Bitcoin control options]
+network=testnet
+bitcoin-rpcconnect=
+bitcoin-rpcport=
+bitcoin-rpcuser=umbrel
+bitcoin-rpcpassword=
+
+
+# [Lightning daemon options]
+log-file=/data/.lightning/log.txt
+wallet=sqlite3:///data/.lightning/testnet/lightningd.primary.sqlite3:/data/.lightning/testnet/lightningd.secondary.sqlite3
+
+
+# [Lightning node customization options]
+alias=
+min-capacity-sat=20000
+# milli satoshi
+fee-base=0
+# ppm
+fee-per-satoshi=1000
+
+
+# [Lightning channel and HTLC options]
+# large-channels
+funding-confirms=2
+
+
+# [Payment control options]
+# disable-mpp
+
+
+# [Networking options]
+bind-addr=10.9.9.9:9735
+announce-addr=
+always-use-proxy=false
+
+
+# [Lightning Plugins]
+
+
+# [Experimental Options]
+experimental-onion-messages
+experimental-offers
+# experimental-dual-fund
