@@ -1,10 +1,10 @@
 ```mermaid
 sequenceDiagram
-    participant ノード
-    participant ウォレット
+    participant 支払者のノード
+    participant ウォレットアプリ
     participant Nostrクライアント
     participant LNURLサーバ
-    participant Zapperノード
+    participant 受取人のノード
 
     Nostrクライアント->>LNURLサーバ: LUD06 GET request
 
@@ -14,23 +14,25 @@ sequenceDiagram
     Nostrクライアント->>LNURLサーバ: LUD06 GET request(call back) 
     Note right of Nostrクライアント: ※callbackにzapリクエスト(kind:9734)を含む
     
-    LNURLサーバ->>Zapperノード: API request invoice
+    LNURLサーバ->>受取人のノード: API request invoice
     
-    Zapperノード->>LNURLサーバ: API response
-    Note left of Zapperノード: インボイス
+    受取人のノード->>LNURLサーバ: API response
+    Note left of 受取人のノード: インボイス
     
     LNURLサーバ->>Nostrクライアント: LUD06 JSON response
     Note left of LNURLサーバ: インボイス
 
-    Nostrクライアント->>ウォレット: (アプリ遷移、NIP-47等)
+    Nostrクライアント->>ウォレットアプリ: (アプリ遷移、NIP-47等)
     Note left of Nostrクライアント: インボイス
 
-    ウォレット->>ノード: API pay invoice
-    Note left of ウォレット: インボイス
+    ウォレットアプリ->>支払者のノード: API pay invoice
+    Note left of ウォレットアプリ: インボイス
 
-    ノード->>Zapperノード: LN送金
+    支払者のノード->>受取人のノード: LN送金
     
-    Zapperノード->>Nostrクライアント: イベント公開
-    Note left of Zapperノード: zapレシート(kind:9735)
+    LNURLサーバ-->>受取人のノード: (ポーリングなど)
+    
+    LNURLサーバ->>Nostrクライアント: イベント公開
+    Note left of LNURLサーバ: zapレシート(kind:9735)
 
 ```
