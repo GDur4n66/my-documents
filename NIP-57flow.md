@@ -9,7 +9,7 @@ sequenceDiagram
     Nostrクライアント->>LNURLサーバ: LUD06 GET request
 
     LNURLサーバ->>Nostrクライアント: LUD06 JSON response
-    Note left of LNURLサーバ: allowsNostr : true <br/>nostrPubkey : Zapper Pubkey
+    Note left of LNURLサーバ: allowsNostr : true <br/>nostrPubkey : Pubkey
     
     Nostrクライアント->>LNURLサーバ: LUD06 GET request(call back) 
     Note right of Nostrクライアント: ※callbackにzapリクエスト(kind:9734)を含む
@@ -17,20 +17,20 @@ sequenceDiagram
     LNURLサーバ->>Zapperノード: API request invoice
     
     Zapperノード->>LNURLサーバ: API response
-    Note left of Zapperノード: zapインボイス
+    Note left of Zapperノード: インボイス
     
     LNURLサーバ->>Nostrクライアント: LUD06 JSON response
-    Note left of LNURLサーバ: zapインボイス
+    Note left of LNURLサーバ: インボイス
 
-    Nostrクライアント->>ウォレット: (コピペなど)
-    Note left of Nostrクライアント: zapインボイス
+    Nostrクライアント->>ウォレット: (アプリ遷移、NIP-47等)
+    Note left of Nostrクライアント: インボイス
 
     ウォレット->>ノード: API pay invoice
-    Note left of ウォレット: zapインボイス
+    Note left of ウォレット: インボイス
 
-    ノード->>Zapperノード: 送金
+    ノード->>Zapperノード: LN送金
     
-    Zapperノード->>Nostrクライアント: broadcast event
-    Note left of Zapperノード: zapノート(kind:9735)
+    Zapperノード->>Nostrクライアント: イベント公開
+    Note left of Zapperノード: zapレシート(kind:9735)
 
 ```
