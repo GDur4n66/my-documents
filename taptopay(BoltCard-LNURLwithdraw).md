@@ -16,6 +16,7 @@ sequenceDiagram
     PoS端末->>BoltCardサーバ: LUD-03: GET request
     BoltCardサーバ->>PoS端末: LUD-03:JSON response
     PoS端末->>BoltCardサーバ: LUD-03:GET request(callback)
+    Note right of PoS端末: ※callbackにインボイス含む
     BoltCardサーバ->>BoltCardのノード: API:インボイス支払い
 　　BoltCardのノード->>BoltCardサーバ: API:response
     BoltCardサーバ->>PoS端末: LUD-03 JSON response
