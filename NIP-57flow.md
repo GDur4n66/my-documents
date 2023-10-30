@@ -32,7 +32,7 @@ sequenceDiagram
     
     LNURLサーバ-->>受取人のノード: (ポーリングなど)
     
-    LNURLサーバ->>Nostrクライアント: イベント公開
+    LNURLサーバ->>Nostrクライアント: [支払者のリレー]を介してイベント公開
     Note left of LNURLサーバ: zapレシート(kind:9735)
 
 ```
