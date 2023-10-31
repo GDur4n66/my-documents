@@ -1,38 +1,42 @@
 ```mermaid
 sequenceDiagram
-    participant 支払者のノード
-    participant ウォレットアプリ
-    participant Nostrクライアント
-    participant LNURLサーバ
-    participant 受取人のノード
+    participant 支払人のリレー
+    participant 支払人のLNノード
+    participant 支払人のウォレット
+    participant 支払人のNostrクライアント
+    participant 受取人のLNURLサーバ
+    participant 受取人のLNノード
 
-    Nostrクライアント->>LNURLサーバ: LUD06 GET request
+    支払人のNostrクライアント->>受取人のLNURLサーバ: LUD06 GET request
 
-    LNURLサーバ->>Nostrクライアント: LUD06 JSON response
-    Note left of LNURLサーバ: allowsNostr : true <br/>nostrPubkey : Pubkey
+    受取人のLNURLサーバ->>支払人のNostrクライアント: LUD06 JSON response
+    Note left of 受取人のLNURLサーバ: allowsNostr : true <br/>nostrPubkey : Pubkey
     
-    Nostrクライアント->>LNURLサーバ: LUD06 GET request(call back) 
-    Note right of Nostrクライアント: ※callbackにzapリクエスト(kind:9734)を含む
+    支払人のNostrクライアント->>受取人のLNURLサーバ: LUD06 GET request(call back) 
+    Note right of 支払人のNostrクライアント: ※callbackにzapリクエスト(kind:9734)を含む
     
-    LNURLサーバ->>受取人のノード: API request invoice
+    受取人のLNURLサーバ->>受取人のLNノード: API request invoice
     
-    受取人のノード->>LNURLサーバ: API response
-    Note left of 受取人のノード: インボイス
+    受取人のLNノード->>受取人のLNURLサーバ: API response
+    Note left of 受取人のLNノード: インボイス
     
-    LNURLサーバ->>Nostrクライアント: LUD06 JSON response
-    Note left of LNURLサーバ: インボイス
+    受取人のLNURLサーバ->>支払人のNostrクライアント: LUD06 JSON response
+    Note left of 受取人のLNURLサーバ: インボイス
 
-    Nostrクライアント->>ウォレットアプリ: (アプリ遷移、NIP-47等)
-    Note left of Nostrクライアント: インボイス
+    支払人のNostrクライアント->>支払人のウォレット: (アプリ遷移、NIP-47等)
+    Note left of 支払人のNostrクライアント: インボイス
 
-    ウォレットアプリ->>支払者のノード: API pay invoice
-    Note left of ウォレットアプリ: インボイス
+    支払人のウォレット->>支払人のLNノード: API pay invoice
+    Note left of 支払人のウォレット: インボイス
 
-    支払者のノード->>受取人のノード: LN送金
+    支払人のLNノード->>受取人のLNノード: Lightning Networkで送金
     
-    LNURLサーバ-->>受取人のノード: (ポーリングなど)
+    受取人のLNURLサーバ-->>受取人のLNノード: (ポーリングなど)
     
-    LNURLサーバ->>Nostrクライアント: [支払者のリレー]を介してイベント公開
-    Note left of LNURLサーバ: zapレシート(kind:9735)
+    受取人のLNURLサーバ->>支払人のリレー: イベント公開
+    Note left of 受取人のLNURLサーバ: zapレシート(kind:9735)
+
+    支払人のリレー->>支払人のNostrクライアント: イベント公開
+    Note right of 支払人のリレー: zapレシート(kind:9735)
 
 ```
